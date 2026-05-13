@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PALMA — Healthy Lab</title>
+  <meta name="description" content="PALMA Healthy Lab — smoothies cold pressed, açaí bowls, wellness shots e vegan protein per palestre, centri pilates e abbonamenti privati.">
+  <link rel="preload" as="image" href="assets/hero.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:     #F5F0E8;
+      --cream-mid: #EDE7DC;
+      --sand:      #D9D0C1;
+      --dark:      #1E1E1E;
+      --dark-mid:  #2C2C2C;
+      --text:      #3D3D3D;
+      --text-lt:   #7A7A7A;
+      --olive:     #5C5C3D;
+      --nav-h:     80px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── INTRO LOADER ────────────────────────── */
+    #palma-intro {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      animation: introFadeOut 0.5s ease 1.0s forwards;
+    }
+
+    #palma-intro-logo {
+      height: 100px;
+      width: auto;
+      filter: brightness(0);
+      opacity: 0;
+      animation: introLogoIn 0.55s ease 0.1s forwards;
+    }
+
+    @keyframes introLogoIn {
+      from { opacity: 0; transform: scale(0.94); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes introFadeOut {
+      from { opacity: 1; }
+      to   { opacity: 0; visibility: hidden; }
+    }
+
+    /* ── NAV ─────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0 40px;
+      height: var(--nav-h);
+      background: rgba(245,240,232,0.92);
+      backdrop-filter: blur(20px) saturate(1.2);
+      -webkit-backdrop-filter: blur(20px) saturate(1.2);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+
+    .nav-left {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-left a {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--dark);
+      transition: opacity 0.2s;
+    }
+    .nav-left a:hover { opacity: 0.55; }
+
+    .nav-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .nav-logo img {
+      height: 120px;
+      width: auto;
+      display: block;
+      filter: brightness(0);
+    }
+
+    .nav-right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-icon-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--dark);
+      transition: opacity 0.2s;
+    }
+    .nav-icon-link:hover { opacity: 0.55; }
+
+    .nav-divider { width: 1px; height: 14px; background: rgba(0,0,0,0.15); }
+
+    /* ── HERO ────────────────────────────────── */
+    .hero {
+      position: relative;
+      width: 100%;
+      padding-top: var(--nav-h);
+      overflow: hidden;
+      background: #EDE8DF;
+    }
+
+    .hero-inner {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - var(--nav-h));
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Hero background image */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    /* Palm shadow overlay top-right */
+    .hero-inner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(237,232,223,0.55) 0%,
+        rgba(237,232,223,0.0) 50%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Text left */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 64px;
+      max-width: 480px;
+    }
+
+    .hero-title {
+      font-size: clamp(48px, 6.5vw, 96px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      color: var(--dark);
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 36px;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 16px 36px;
+      background: var(--dark);
+      color: white;
+      border-radius: 100px;
+      transition: background 0.25s;
+    }
+    .hero-btn:hover { background: #3a3a3a; }
+
+    /* Circular badge */
+    .hero-badge {
+      position: absolute;
+      right: 48px;
+      top: 24px;
+      z-index: 2;
+      width: 120px;
+      height: 120px;
+    }
+
+    .hero-badge svg {
+      width: 100%;
+      height: 100%;
+      animation: rotateBadge 20s linear infinite;
+    }
+
+    @keyframes rotateBadge {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .hero-badge-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Scroll arrow */
+    .hero-scroll {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .hero-scroll svg { opacity: 0.4; }
+
+    /* ── FEATURES STRIP ──────────────────────── */
+    .features {
+      background: var(--cream);
+      padding: 80px 64px;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 80px;
+      align-items: center;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+
+    .features-left {}
+
+    .features-title {
+      font-size: clamp(20px, 2.2vw, 30px);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 20px;
+    }
+
+    .features-text {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .features-btn {
+      display: inline-block;
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--dark);
+      border: 1.5px solid var(--dark);
+      padding: 12px 28px;
+      border-radius: 100px;
+      transition: background 0.25s, color 0.25s;
+    }
+    .features-btn:hover { background: var(--dark); color: white; }
+
+    .features-icons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .feat-item {
+      padding: 0 28px;
+      border-right: 1px solid rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .feat-item:first-child { padding-left: 0; }
+    .feat-item:last-child { border-right: none; padding-right: 0; }
+
+    .feat-item svg {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 14px;
+      stroke: var(--dark);
+      stroke-width: 1.3;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .feat-name {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .feat-desc {
+      font-size: 11.5px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--text-lt);
+    }
+
+    /* ── CATEGORIES ──────────────────────────── */
+    .categories {
+      background: var(--cream);
+      padding: 90px 64px;
+    }
+
+    .categories-title {
+      text-align: center;
+      font-size: clamp(14px, 1.5vw, 18px);
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 56px;
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .cat-card {
+      cursor: pointer;
+    }
+
+    .cat-img-wrap {
+      width: 100%;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      background: var(--cream-mid);
+      margin-bottom: 16px;
+    }
+
+    .cat-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s ease;
+      filter: brightness(1.02) saturate(1.05);
+    }
+    .cat-card:hover .cat-img-wrap img { transform: scale(1.04); }
+
+    .cat-name {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 6px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .cat-card:hover .cat-name { transform: translateY(-2px); }
+
+    .cat-link {
+      display: block;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--text-lt);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .cat-card:hover .cat-link { color: var(--dark); }
+
+    /* ── COMMUNITY ───────────────────────────── */
+    .community {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 520px;
+    }
+
+    .community-img {
+      position: relative;
+      overflow: hidden;
+      background: #1A2B1A;
+    }
+
+    .community-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.75) saturate(1.2);
+    }
+
+    .community-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .community-logo img {
+      height: 80px;
+      width: auto;
+      display: block;
+      filter: brightness(0) invert(1);
+      margin: 0 auto;
+    }
+
+    .community-text {
+      background: var(--cream);
+      padding: 80px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .community-title {
+      font-size: clamp(18px, 2vw, 26px);
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .community-desc {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 36px;
+      max-width: 360px;
+    }
+
+    .community-form {
+      display: flex;
+      max-width: 420px;
+      margin-bottom: 14px;
+      background: white;
+      border: 1px solid rgba(0,0,0,0.15);
+      border-radius: 100px;
+      overflow: hidden;
+      padding: 5px 5px 5px 20px;
+      align-items: center;
+    }
+
+    .community-input {
+      flex: 1;
+      padding: 10px 0;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--dark);
+      background: transparent;
+      border: none;
+      outline: none;
+    }
+    .community-input::placeholder { color: #aaa; }
+
+    .community-btn {
+      padding: 12px 24px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: var(--dark);
+      color: white;
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: background 0.25s;
+      white-space: nowrap;
+    }
+    .community-btn:hover { background: #3a3a3a; }
+
+    .community-note {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-lt);
+    }
+
+    /* ── VIDEO SECTION ───────────────────────── */
+    .video-section {
+      position: relative;
+      width: 100%;
+      height: 56vw;
+      max-height: 800px;
+      min-height: 360px;
+      overflow: hidden;
+      background: #0e141c;
+    }
+
+    .video-section video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(14,20,28,0.3), rgba(14,20,28,0.6));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-text {
+      text-align: center;
+      color: white;
+    }
+
+    .video-label {
+      font-size: 9.5px;
+      font-weight: 500;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 20px;
+    }
+
+    .video-title {
+      font-size: clamp(32px, 5vw, 80px);
+      font-weight: 800;
+      font-style: italic;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      color: rgba(255,255,255,0.95);
+    }
+
+    /* ── FOOTER ──────────────────────────────── */
+    footer {
+      background: #1A1A1A;
+      padding: 72px 64px 0;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 200px 1fr 1fr 1fr 200px;
+      gap: 48px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-logo img {
+      height: 56px;
+      width: auto;
+      display: block;
+      filter: brightness(0) invert(1);
+      opacity: 0.85;
+      margin-bottom: 0;
+    }
+
+    .footer-col-title {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col a {
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: rgba(255,255,255,0.85); }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .footer-social a {
+      color: rgba(255,255,255,0.5);
+      transition: color 0.2s;
+    }
+    .footer-social a:hover { color: rgba(255,255,255,0.9); }
+
+    .footer-contact {
+      font-size: 11.5px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.04em;
+      line-height: 1.6;
+    }
+
+    .footer-bottom {
+      padding: 20px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 28px;
+    }
+
+    .footer-legal a {
+      font-size: 11px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.25);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 1024px) {
+      .features { grid-template-columns: 1fr; gap: 48px; padding: 64px 40px; }
+      .features-icons { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .feat-item { border-right: none; padding: 0; }
+      .categories { padding: 72px 40px; }
+      .categories-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; height: 64px; }
+      .hero-content { padding: 0 28px; }
+      .hero-badge { display: none; }
+      .community { grid-template-columns: 1fr; }
+      .community-img { min-height: 300px; }
+      .community-text { padding: 56px 28px; }
+      .footer-top { grid-template-columns: 1fr; }
+      footer { padding: 48px 24px 0; }
+      .marquee-strip { display: none; }
+    }
+
+    /* ── SCROLL REVEAL ──────────────────────── */
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal-item.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── HERO 001 ────────────────────────────── */
+    .hero-num {
+      position: absolute;
+      bottom: 36px;
+      left: 48px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      color: rgba(30,30,30,0.35);
+      z-index: 2;
+    }
+
+    /* ── CUSTOM CURSOR ───────────────────────── */
+    body { cursor: none; }
+    #cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 24px; height: 24px;
+      border: 1.5px solid var(--dark);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+      mix-blend-mode: multiply;
+    }
+    #cursor.hovering {
+      width: 44px; height: 44px;
+      background: rgba(30,30,30,0.08);
+    }
+    a, button { cursor: none; }
+
+    /* ── MARQUEE STRIP ───────────────────────── */
+    .marquee-strip {
+      background: var(--dark);
+      overflow: hidden;
+      padding: 13px 0;
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 28s linear infinite;
+    }
+    .marquee-track span {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--cream);
+      padding: 0 28px;
+      white-space: nowrap;
+    }
+    .marquee-track span.mdot {
+      color: #8B7355;
+      font-size: 12px;
+      padding: 0;
+      letter-spacing: 0;
+    }
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── NAV CTA ─────────────────────────────── */
+    .nav-cta-pill {
+      display: inline-block;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 9px 20px;
+      background: var(--dark);
+      color: white !important;
+      border-radius: 100px;
+      transition: background 0.2s;
+      opacity: 1 !important;
+    }
+    .nav-cta-pill:hover { background: #3a3a3a; }
+
+    .nav-cta-text {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--dark);
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .nav-cta-text:hover { opacity: 1; }
+
+    /* ── HOW IT WORKS ────────────────────────── */
+    .how {
+      background: var(--cream-mid);
+      padding: 90px 64px;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+
+    .how-header {
+      margin-bottom: 64px;
+    }
+
+    .how-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-lt);
+      margin-bottom: 16px;
+    }
+
+    .how-title {
+      font-size: clamp(20px, 2.2vw, 30px);
+      font-weight: 300;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+    .how-title strong { font-weight: 800; font-style: italic; }
+
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .how-step {
+      padding: 0 48px 0 0;
+      border-right: 1px solid rgba(0,0,0,0.1);
+      margin-right: 48px;
+    }
+    .how-step:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+
+    .how-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      color: var(--text-lt);
+      margin-bottom: 20px;
+    }
+
+    .how-step-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .how-step-desc {
+      font-size: 12.5px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text);
+    }
+
+    /* ── PLANS ───────────────────────────────── */
+    .plans {
+      background: var(--cream);
+      padding: 90px 64px;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+
+    .plans-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 56px;
+    }
+
+    .plans-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-lt);
+      margin-bottom: 14px;
+    }
+
+    .plans-title {
+      font-size: clamp(20px, 2.2vw, 30px);
+      font-weight: 300;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+    .plans-title strong { font-weight: 800; font-style: italic; }
+
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .plan-card {
+      background: var(--cream-mid);
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .plan-card:hover { border-color: rgba(0,0,0,0.15); }
+    .plan-card.featured { background: var(--dark); }
+
+    .plan-tag {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-lt);
+      margin-bottom: 24px;
+    }
+    .plan-card.featured .plan-tag { color: rgba(245,240,232,0.45); }
+
+    .plan-name {
+      font-size: 22px;
+      font-weight: 800;
+      font-style: italic;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .plan-card.featured .plan-name { color: var(--cream); }
+
+    .plan-desc {
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--text);
+      margin-bottom: 32px;
+      flex: 1;
+    }
+    .plan-card.featured .plan-desc { color: rgba(245,240,232,0.6); }
+
+    .plan-features {
+      list-style: none;
+      margin-bottom: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .plan-features li {
+      font-size: 11.5px;
+      font-weight: 400;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .plan-card.featured .plan-features li { color: rgba(245,240,232,0.75); }
+
+    .plan-features li::before {
+      content: '';
+      width: 16px;
+      height: 1px;
+      background: var(--text-lt);
+      flex-shrink: 0;
+    }
+    .plan-card.featured .plan-features li::before { background: rgba(245,240,232,0.3); }
+
+    .plan-cta {
+      display: inline-block;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 100px;
+      text-align: center;
+      transition: all 0.25s;
+    }
+
+    .plan-cta-outline {
+      color: var(--dark);
+      border: 1.5px solid var(--dark);
+    }
+    .plan-cta-outline:hover { background: var(--dark); color: white; }
+
+    .plan-cta-solid {
+      background: var(--cream);
+      color: var(--dark);
+    }
+    .plan-cta-solid:hover { background: #ece7de; }
+
+    /* ── PARTNER B2B ─────────────────────────── */
+    .partner {
+      background: var(--dark);
+      padding: 90px 64px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .partner-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.35);
+      margin-bottom: 20px;
+    }
+
+    .partner-title {
+      font-size: clamp(22px, 2.8vw, 40px);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+    .partner-title strong { font-weight: 800; font-style: italic; }
+
+    .partner-desc {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(245,240,232,0.55);
+      margin-bottom: 40px;
+      max-width: 400px;
+    }
+
+    .partner-cta {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 16px 36px;
+      background: var(--cream);
+      color: var(--dark);
+      border-radius: 100px;
+      transition: background 0.25s;
+    }
+    .partner-cta:hover { background: #ece7de; }
+
+    .partner-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .partner-item {
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(245,240,232,0.08);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .partner-item:first-child { border-top: 1px solid rgba(245,240,232,0.08); }
+
+    .partner-item-num {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: rgba(245,240,232,0.2);
+      min-width: 32px;
+    }
+
+    .partner-item-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.04em;
+    }
+
+    .partner-item-desc {
+      font-size: 11.5px;
+      font-weight: 300;
+      color: rgba(245,240,232,0.4);
+      margin-top: 3px;
+    }
+
+    /* ── RESPONSIVE NUOVE SEZIONI ────────────── */
+    @media (max-width: 1024px) {
+      .how { padding: 64px 40px; }
+      .how-steps { grid-template-columns: 1fr; gap: 40px; }
+      .how-step { border-right: none; padding-right: 0; margin-right: 0; border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 40px; }
+      .how-step:last-child { border-bottom: none; padding-bottom: 0; }
+      .plans { padding: 64px 40px; }
+      .plans-grid { grid-template-columns: 1fr; gap: 16px; }
+      .partner { grid-template-columns: 1fr; gap: 48px; padding: 64px 40px; }
+    }
+
+    /* ── HERO TITLE REVEAL ───────────────────── */
+    .hero-title-word {
+      display: block;
+    }
+    .hero-title-inner {
+      display: block;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: wordReveal 0.9s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    .hero-title-inner:nth-child(1) { animation-delay: 0.1s; }
+    .hero-title-inner:nth-child(2) { animation-delay: 0.22s; }
+    .hero-title-inner:nth-child(3) { animation-delay: 0.34s; }
+    @keyframes wordReveal {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CUSTOM CURSOR -->
+  <div id="cursor"></div>
+
+  <!-- INTRO LOADER -->
+  <div id="palma-intro">
+    <img src="assets/UFF.png" alt="PALMA" id="palma-intro-logo">
+  </div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <ul class="nav-left">
+      <li><a href="#categorie">Menu</a></li>
+      <li><a href="#come-funziona">Come Funziona</a></li>
+      <li><a href="#chi-siamo">Missione</a></li>
+    </ul>
+    <div class="nav-logo">
+      <img src="assets/UFF.png" alt="PALMA">
+    </div>
+    <div class="nav-right">
+      <a href="partner.html" class="nav-cta-text">Partner B2B</a>
+      <div class="nav-divider"></div>
+      <a href="abbonamenti.html" class="nav-cta-pill">Abbonati</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <!-- Background image: products on marble -->
+      <img class="hero-bg"
+           src="assets/hero.webp"
+           alt="PALMA products">
+
+      <!-- Text overlay left -->
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span class="hero-title-word"><span class="hero-title-inner">Pure.</span></span>
+          <span class="hero-title-word"><span class="hero-title-inner">Powerful.</span></span>
+          <span class="hero-title-word"><span class="hero-title-inner">Palma.</span></span>
+        </h1>
+        <p class="hero-sub">Ingredienti veri.<br>Energia pulita.</p>
+        <a href="abbonamenti.html" class="hero-btn">Scopri gli abbonamenti</a>
+      </div>
+
+      <!-- Circular badge right -->
+      <div class="hero-badge">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <path id="circle" d="M 100,100 m -75,0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"/>
+          </defs>
+          <circle cx="100" cy="100" r="88" fill="none" stroke="rgba(30,30,30,0.2)" stroke-width="1"/>
+          <text font-family="Montserrat,sans-serif" font-size="13" font-weight="600" fill="#2C2C2C" letter-spacing="6">
+            <textPath href="#circle">COLD PRESSED · ORGANIC · PLANT BASED · ENERGIZING ·</textPath>
+          </text>
+        </svg>
+      </div>
+
+      <!-- Editorial number -->
+      <div class="hero-num">001</div>
+
+      <!-- Scroll indicator -->
+      <div class="hero-scroll" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="1.5" stroke-linecap="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE STRIP -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span>PALMA</span><span class="mdot">·</span>
+      <span>HEALTHY LAB</span><span class="mdot">·</span>
+      <span>COLD PRESSED</span><span class="mdot">·</span>
+      <span>PLANT BASED</span><span class="mdot">·</span>
+      <span>ABBONAMENTO</span><span class="mdot">·</span>
+      <span>EST. 2026</span><span class="mdot">·</span>
+      <span>INGREDIENTI VERI</span><span class="mdot">·</span>
+      <span>ENERGIA PULITA</span><span class="mdot">·</span>
+      <span>PALMA</span><span class="mdot">·</span>
+      <span>HEALTHY LAB</span><span class="mdot">·</span>
+      <span>COLD PRESSED</span><span class="mdot">·</span>
+      <span>PLANT BASED</span><span class="mdot">·</span>
+      <span>ABBONAMENTO</span><span class="mdot">·</span>
+      <span>EST. 2026</span><span class="mdot">·</span>
+      <span>INGREDIENTI VERI</span><span class="mdot">·</span>
+      <span>ENERGIA PULITA</span><span class="mdot">·</span>
+    </div>
+  </div>
+
+  <!-- FEATURES STRIP -->
+  <section class="features" id="features">
+    <div class="features-left">
+      <h2 class="features-title"><span style="font-weight:300;font-style:normal;">More than a drink.</span><br><span style="font-weight:800;font-style:italic;">A lifestyle.</span></h2>
+      <p class="features-text">In PALMA crediamo nel potere degli ingredienti veri e nel benessere quotidiano. Ogni prodotto è cold pressed, 100% naturale e pensato per elevare la tua giornata.</p>
+      <a href="#chi-siamo" class="features-btn">Our Story</a>
+    </div>
+    <div class="features-icons">
+
+      <div class="feat-item">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2a9 9 0 0 1 0 18A9 9 0 0 1 12 2z"/>
+          <path d="M12 2c0 0-4 4-4 10s4 10 4 10"/>
+          <path d="M8 8c1.5-1 3.5-1.5 4-1.5"/>
+          <path d="M16 8c-1.5-1-3.5-1.5-4-1.5"/>
+        </svg>
+        <p class="feat-name">Organic</p>
+        <p class="feat-desc">Only real, organic ingredients.</p>
+      </div>
+
+      <div class="feat-item">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2 C12 2 5 9 5 15 C5 19.4 8.1 22 12 22 C15.9 22 19 19.4 19 15 C19 9 12 2 12 2Z"/>
+        </svg>
+        <p class="feat-name">Cold Pressed</p>
+        <p class="feat-desc">Maximum nutrients, maximum flavor.</p>
+      </div>
+
+      <div class="feat-item">
+        <svg viewBox="0 0 24 24">
+          <line x1="12" y1="22" x2="12" y2="10"/>
+          <path d="M12 15 C12 15 7 12 7 7 C7 4.2 9.2 2 12 2 C14.8 2 17 4.2 17 7 C17 12 12 15 12 15Z"/>
+          <path d="M9 19 C9 19 6 17.5 6 15"/>
+        </svg>
+        <p class="feat-name">Plant Based</p>
+        <p class="feat-desc">Good for you, good for the planet.</p>
+      </div>
+
+      <div class="feat-item">
+        <svg viewBox="0 0 24 24">
+          <polyline points="13 2 8 14 13 14 11 22 18 10 13 10 13 2"/>
+        </svg>
+        <p class="feat-name">Energizing</p>
+        <p class="feat-desc">Clean energy that fuels your body.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- COME FUNZIONA -->
+  <section class="how" id="come-funziona">
+    <div class="how-header reveal-item">
+      <p class="how-label">Come funziona</p>
+      <h2 class="how-title">Semplice come <strong>bere bene.</strong></h2>
+    </div>
+    <div class="how-steps">
+      <div class="how-step reveal-item" style="transition-delay:0.08s">
+        <p class="how-num">01</p>
+        <h3 class="how-step-title">Scegli il tuo piano</h3>
+        <p class="how-step-desc">Abbonamento individuale o per la tua struttura. Scegli la frequenza e i prodotti che preferisci. Nessun vincolo, cancelli quando vuoi.</p>
+      </div>
+      <div class="how-step reveal-item" style="transition-delay:0.18s">
+        <p class="how-num">02</p>
+        <h3 class="how-step-title">Ricevi ogni settimana</h3>
+        <p class="how-step-desc">Cold pressed, freschi di laboratorio. Consegna diretta da noi a te — o alla tua palestra, studio pilates, centro wellness.</p>
+      </div>
+      <div class="how-step reveal-item" style="transition-delay:0.28s">
+        <p class="how-num">03</p>
+        <h3 class="how-step-title">Vivi PALMA ogni giorno</h3>
+        <p class="how-step-desc">Energia pulita, ingredienti veri, abitudine che diventa lifestyle. Questo è PALMA.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="categories" id="categorie">
+    <h2 class="categories-title reveal-item">Il nostro menu.</h2>
+    <div class="categories-grid">
+
+      <div class="cat-card reveal-item" style="transition-delay:0.05s">
+        <div class="cat-img-wrap">
+          <img src="assets/fuoco.webp" alt="Cold Pressed Juices">
+        </div>
+        <p class="cat-name">Cold Pressed Juices</p>
+        <a href="#abbonamenti" class="cat-link">Incluso nell'abbonamento →</a>
+      </div>
+
+      <div class="cat-card reveal-item" style="transition-delay:0.12s">
+        <div class="cat-img-wrap">
+          <img src="assets/flamingo.webp" alt="Smoothies">
+        </div>
+        <p class="cat-name">Smoothies</p>
+        <a href="#abbonamenti" class="cat-link">Incluso nell'abbonamento →</a>
+      </div>
+
+      <div class="cat-card reveal-item" style="transition-delay:0.19s">
+        <div class="cat-img-wrap">
+          <img src="assets/immune.webp" alt="Wellness Shots">
+        </div>
+        <p class="cat-name">Wellness Shots</p>
+        <a href="#abbonamenti" class="cat-link">Incluso nell'abbonamento →</a>
+      </div>
+
+      <div class="cat-card reveal-item" style="transition-delay:0.26s">
+        <div class="cat-img-wrap">
+          <img src="assets/la-classica.webp" alt="Açaí Bowls">
+        </div>
+        <p class="cat-name">Açaí Bowls</p>
+        <a href="#abbonamenti" class="cat-link">Incluso nell'abbonamento →</a>
+      </div>
+
+      <div class="cat-card reveal-item" style="transition-delay:0.33s">
+        <div class="cat-img-wrap">
+          <img src="assets/CACAO CRUNCH.webp" alt="Power Bites">
+        </div>
+        <p class="cat-name">Power Bites</p>
+        <a href="#abbonamenti" class="cat-link">Incluso nell'abbonamento →</a>
+      </div>
+
+      <div class="cat-card reveal-item" style="transition-delay:0.40s">
+        <div class="cat-img-wrap">
+          <img src="assets/VEGAN PROTEIN CHOCOLATE BROWNIE.webp" alt="Vegan Protein">
+        </div>
+        <p class="cat-name">Vegan Protein</p>
+        <a href="#abbonamenti" class="cat-link">Incluso nell'abbonamento →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABBONAMENTI -->
+  <section class="plans" id="abbonamenti">
+    <div class="plans-header reveal-item">
+      <div>
+        <p class="plans-label">Abbonamenti</p>
+        <h2 class="plans-title">Scegli il tuo <strong>piano PALMA.</strong></h2>
+      </div>
+    </div>
+    <div class="plans-grid">
+
+      <div class="plan-card reveal-item" style="transition-delay:0.05s">
+        <p class="plan-tag">Individuale</p>
+        <h3 class="plan-name">Personal</h3>
+        <p class="plan-desc">Per chi vuole vivere PALMA ogni giorno. Consegna settimanale a domicilio, personalizzabile.</p>
+        <ul class="plan-features">
+          <li>Box settimanale personalizzata</li>
+          <li>Smoothies, shots & power bites</li>
+          <li>Consegna inclusa</li>
+          <li>Pausa o cancella quando vuoi</li>
+        </ul>
+        <a href="mailto:hello@palmalab.it?subject=Abbonamento Personal" class="plan-cta plan-cta-outline">Inizia ora</a>
+      </div>
+
+      <div class="plan-card featured reveal-item" style="transition-delay:0.15s">
+        <p class="plan-tag">Più richiesto</p>
+        <h3 class="plan-name">Studio</h3>
+        <p class="plan-desc">Per palestre, centri pilates e wellness studio. Fornitura settimanale curata, pronta da offrire ai tuoi clienti.</p>
+        <ul class="plan-features">
+          <li>Fornitura da 30 a 100 unità/settimana</li>
+          <li>Menu rotante stagionale</li>
+          <li>Branding co-marketing PALMA</li>
+          <li>Account manager dedicato</li>
+        </ul>
+        <a href="mailto:hello@palmalab.it?subject=Abbonamento Studio" class="plan-cta plan-cta-solid">Contattaci</a>
+      </div>
+
+      <div class="plan-card reveal-item" style="transition-delay:0.25s">
+        <p class="plan-tag">Business</p>
+        <h3 class="plan-name">Corporate</h3>
+        <p class="plan-desc">Hotel, spa, uffici e realtà corporate. Fornitura su misura, volumi elevati, identità visiva personalizzata.</p>
+        <ul class="plan-features">
+          <li>Volumi su misura</li>
+          <li>Packaging white-label disponibile</li>
+          <li>Contratto annuale con pricing dedicato</li>
+          <li>Supporto prioritario</li>
+        </ul>
+        <a href="mailto:hello@palmalab.it?subject=Abbonamento Corporate" class="plan-cta plan-cta-outline">Parliamone</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PARTNER B2B -->
+  <section class="partner" id="partner">
+    <div class="partner-left reveal-item">
+      <p class="partner-label">B2B Partnership</p>
+      <h2 class="partner-title">Porta <strong>PALMA</strong><br>nella tua struttura.</h2>
+      <p class="partner-desc">Riforniamo palestre, centri pilates, spa e hotel con prodotti freschi, cold pressed, consegnati ogni settimana. I tuoi clienti meritano il meglio.</p>
+      <a href="mailto:hello@palmalab.it?subject=Partnership B2B PALMA" class="partner-cta">Diventa Partner</a>
+    </div>
+    <div class="partner-right reveal-item" style="transition-delay:0.15s">
+      <div class="partner-item">
+        <div>
+          <p class="partner-item-num">01</p>
+        </div>
+        <div>
+          <p class="partner-item-name">Palestre &amp; Fitness</p>
+          <p class="partner-item-desc">Smoothies e protein per i tuoi soci, dopo ogni allenamento.</p>
+        </div>
+      </div>
+      <div class="partner-item">
+        <div>
+          <p class="partner-item-num">02</p>
+        </div>
+        <div>
+          <p class="partner-item-name">Centri Pilates &amp; Yoga</p>
+          <p class="partner-item-desc">Wellness shots e cold pressed per completare l'esperienza.</p>
+        </div>
+      </div>
+      <div class="partner-item">
+        <div>
+          <p class="partner-item-num">03</p>
+        </div>
+        <div>
+          <p class="partner-item-name">Hotel &amp; Spa</p>
+          <p class="partner-item-desc">Colazione premium e room service healthy di alto livello.</p>
+        </div>
+      </div>
+      <div class="partner-item">
+        <div>
+          <p class="partner-item-num">04</p>
+        </div>
+        <div>
+          <p class="partner-item-name">Corporate &amp; Uffici</p>
+          <p class="partner-item-desc">Benessere quotidiano per i tuoi team. Fornitura su misura.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY -->
+  <section class="community" id="community">
+    <div class="community-img">
+      <img src="assets/cacao-ritual.webp" alt="PALMA">
+      <div class="community-logo">
+        <img src="assets/logo-main.png" alt="PALMA">
+      </div>
+    </div>
+    <div class="community-text">
+      <h2 class="community-title">Vuoi PALMA<br>ogni settimana?</h2>
+      <p class="community-desc">Lascia la tua email. Ti contatteremo per configurare il tuo abbonamento personale — prodotti freschi, consegnati da noi.</p>
+      <form class="community-form" onsubmit="joinCommunity(event)">
+        <input class="community-input" type="email" placeholder="La tua email" required>
+        <button class="community-btn" type="submit">Inizia</button>
+      </form>
+      <p class="community-note">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        Nessun pagamento anticipato. Ti richiamiamo noi.
+      </p>
+    </div>
+  </section>
+
+  <!-- VIDEO SECTION -->
+  <section class="video-section" id="chi-siamo">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="assets/hero.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay">
+      <div class="video-text">
+        <p class="video-label">Il nostro mondo</p>
+        <h2 class="video-title">Feel Good Daily.</h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+
+      <div class="footer-logo">
+        <img src="assets/logo-main.png" alt="PALMA">
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-title">Abbonamenti</p>
+        <ul>
+          <li><a href="#abbonamenti">Personal</a></li>
+          <li><a href="#abbonamenti">Studio</a></li>
+          <li><a href="#abbonamenti">Corporate</a></li>
+          <li><a href="#come-funziona">Come Funziona</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-title">Menu</p>
+        <ul>
+          <li><a href="#categorie">Smoothies</a></li>
+          <li><a href="#categorie">Cold Pressed</a></li>
+          <li><a href="#categorie">Wellness Shots</a></li>
+          <li><a href="#categorie">Power Bites</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-title">About</p>
+        <ul>
+          <li><a href="#features">La nostra storia</a></li>
+          <li><a href="#partner">Partner B2B</a></li>
+          <li><a href="#chi-siamo">Missione</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-title">Follow Us</p>
+        <div class="footer-social">
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a href="https://tiktok.com" target="_blank" aria-label="TikTok">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+            </svg>
+          </a>
+        </div>
+        <p class="footer-col-title" style="margin-bottom:8px">Contact</p>
+        <p class="footer-contact">hello@palmalab.it</p>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 PALMA Healthy Lab. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function joinCommunity(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.community-btn');
+      btn.textContent = '✓ Grazie';
+      e.target.reset();
+    }
+
+    /* ── INTRO CLEANUP ── */
+    const intro = document.getElementById('palma-intro');
+    if (intro) {
+      intro.addEventListener('animationend', (e) => {
+        if (e.animationName === 'introFadeOut') intro.remove();
+      });
+    }
+
+    /* ── SCROLL REVEAL ── */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(el => {
+        if (el.isIntersecting) {
+          el.target.classList.add('revealed');
+          revealObserver.unobserve(el.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal-item').forEach(el => revealObserver.observe(el));
+
+    /* ── CUSTOM CURSOR ── */
+    const cursor = document.getElementById('cursor');
+    const interactives = 'a, button';
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+    });
+    document.querySelectorAll(interactives).forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+    });
+    document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
+    document.addEventListener('mouseenter', () => cursor.style.opacity = '1');
+  </script>
+
+</body>
+</html>
