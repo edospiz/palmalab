@@ -67,6 +67,84 @@
       to   { opacity: 0; visibility: hidden; }
     }
 
+    /* ── HAMBURGER & MOBILE MENU ─────────────── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 200;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--dark);
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--cream);
+      z-index: 150;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .mobile-menu-inner {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100%;
+      padding: 80px 36px 60px;
+      gap: 0;
+    }
+    .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
+      margin-bottom: 48px;
+    }
+    .mobile-link {
+      font-size: 32px;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      color: var(--dark);
+      text-decoration: none;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      transition: opacity 0.2s;
+    }
+    .mobile-link:first-child { border-top: 1px solid rgba(0,0,0,0.08); }
+    .mobile-link:hover { opacity: 0.5; }
+    .mobile-cta {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+      margin-top: 8px;
+    }
+
     /* ── NAV ─────────────────────────────────── */
     nav {
       position: fixed;
@@ -699,15 +777,68 @@
     }
 
     @media (max-width: 768px) {
-      nav { padding: 0 20px; height: 64px; }
-      .hero-content { padding: 0 28px; }
+      /* NAV */
+      nav {
+        padding: 0 20px;
+        height: 60px;
+        grid-template-columns: 36px 1fr 36px;
+        gap: 8px;
+      }
+      .nav-left { display: none; }
+      .nav-logo { justify-content: center; }
+      .nav-logo img { height: 68px; }
+      .nav-right { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: block; }
+
+      /* HERO */
+      .hero { padding-top: 60px; }
+      .hero-inner { min-height: calc(100svh - 60px); align-items: flex-end; padding-bottom: 48px; }
+      .hero-inner::after {
+        background: linear-gradient(to top, rgba(237,232,223,0.85) 0%, rgba(237,232,223,0.2) 50%, transparent 80%);
+      }
+      .hero-bg { object-position: 60% center; }
+      .hero-content { padding: 0 24px; max-width: 100%; }
+      .hero-title { font-size: 48px; margin-bottom: 12px; }
+      .hero-sub { font-size: 13px; margin-bottom: 24px; }
+      .hero-btn { padding: 14px 28px; font-size: 10px; }
       .hero-badge { display: none; }
+      .hero-num { display: none; }
+      .hero-scroll { display: none; }
+
+      /* SECTIONS */
+      .features { padding: 56px 24px; gap: 40px; }
+      .features-icons { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .categories { padding: 56px 24px; }
+      .categories-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .cat-card { padding: 28px 20px; }
+      .cat-img { height: 140px; }
+
+      /* COME FUNZIONA */
+      .how { padding: 56px 24px; }
+      .how-steps { grid-template-columns: 1fr; gap: 32px; }
+
+      /* ABBONAMENTI */
+      .plans { padding: 56px 24px; }
+      .plans-grid { grid-template-columns: 1fr; gap: 20px; }
+
+      /* PARTNER */
+      .partner-dark { padding: 64px 24px; }
+      .partner-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+
+      /* COMMUNITY */
       .community { grid-template-columns: 1fr; }
-      .community-img { min-height: 300px; }
-      .community-text { padding: 56px 28px; }
-      .footer-top { grid-template-columns: 1fr; }
+      .community-img { min-height: 260px; }
+      .community-text { padding: 48px 24px; }
+
+      /* FOOTER */
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
       footer { padding: 48px 24px 0; }
       .marquee-strip { display: none; }
+
+      /* CURSOR — disabilita su touch */
+      body { cursor: auto; }
+      #cursor { display: none; }
     }
 
     /* ── SCROLL REVEAL ──────────────────────── */
@@ -1150,7 +1281,24 @@
       <div class="nav-divider"></div>
       <a href="abbonamenti.html" class="nav-cta-pill">Abbonati</a>
     </div>
+    <!-- HAMBURGER (mobile only) -->
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-inner">
+      <nav class="mobile-nav-links">
+        <a href="#categorie" class="mobile-link">Menu</a>
+        <a href="#come-funziona" class="mobile-link">Come Funziona</a>
+        <a href="#chi-siamo" class="mobile-link">Missione</a>
+        <a href="partner.html" class="mobile-link">Partner B2B</a>
+      </nav>
+      <a href="abbonamenti.html" class="mobile-cta">Abbonati →</a>
+    </div>
+  </div>
 
   <!-- HERO -->
   <section class="hero" id="home">
@@ -1558,6 +1706,25 @@
       const btn = e.target.querySelector('.community-btn');
       btn.textContent = '✓ Grazie';
       e.target.reset();
+    }
+
+    /* ── HAMBURGER MENU ── */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+        document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+      });
+      // Chiudi cliccando un link
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('open');
+          mobileMenu.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
     }
 
     /* ── INTRO CLEANUP ── */
