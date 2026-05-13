@@ -837,8 +837,6 @@
       .marquee-strip { display: none; }
 
       /* CURSOR — disabilita su touch */
-      body { cursor: auto; }
-      #cursor { display: none; }
     }
 
     /* ── SCROLL REVEAL ──────────────────────── */
@@ -864,23 +862,7 @@
       z-index: 2;
     }
 
-    /* ── CUSTOM CURSOR ───────────────────────── */
-    body { cursor: none; }
-    #cursor {
-      position: fixed;
-      top: 0; left: 0;
-      width: 8px; height: 8px;
-      background: var(--dark);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: width 0.15s ease, height 0.15s ease, opacity 0.2s ease;
-    }
-    #cursor.hovering {
-      width: 14px; height: 14px;
-    }
-    a, button { cursor: none; }
+    /* ── MARQUEE STRIP ───────────────────────── */
 
     /* ── MARQUEE STRIP ───────────────────────── */
     .marquee-strip {
@@ -1257,7 +1239,6 @@
 <body>
 
   <!-- CUSTOM CURSOR -->
-  <div id="cursor"></div>
 
   <!-- INTRO LOADER -->
   <div id="palma-intro">
@@ -1744,19 +1725,6 @@
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal-item').forEach(el => revealObserver.observe(el));
 
-    /* ── CUSTOM CURSOR ── */
-    const cursor = document.getElementById('cursor');
-    const interactives = 'a, button';
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top  = e.clientY + 'px';
-    });
-    document.querySelectorAll(interactives).forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
-    });
-    document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
-    document.addEventListener('mouseenter', () => cursor.style.opacity = '1');
   </script>
 
 </body>
