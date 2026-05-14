@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PALMA — Healthy Lab</title>
   <meta name="description" content="PALMA Healthy Lab — smoothies cold pressed, açaí bowls, wellness shots e vegan protein per palestre, centri pilates e abbonamenti privati.">
+  <meta name="theme-color" content="#2D4A2D">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
   <link rel="preload" as="image" href="assets/hero.webp">
@@ -27,6 +28,16 @@
     }
 
     html { scroll-behavior: smooth; }
+
+    body::before {
+      content: '';
+      display: block;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: #2D4A2D;
+      z-index: 9999;
+    }
 
     body {
       font-family: 'Montserrat', sans-serif;
